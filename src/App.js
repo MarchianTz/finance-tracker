@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Header from './components/Header';
 import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
-import './App.css';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
@@ -12,7 +11,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="max-w-xl mx-auto mt-10 p-4 bg-white shadow rounded">
       <Header />
       <TransactionForm onAdd={addTransaction} />
       <TransactionList items={transactions} />
