@@ -5,8 +5,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { collection, addDoc, getDocs} from 'firebase/firestore';
 import { db } from './firebase';
 
-import Dashboard from './components/Dashboard';
-import Login from './components/Login';
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
@@ -39,9 +41,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route
           path="/dashboard"
-          element={<Dashboard transactions={transactions} onAdd={addTransaction} />} />
+          element={
+          <ProtectedRoute>
+            <Dashboard transactions={transactions} onAdd={addTransaction} />
+          </ProtectedRoute>
+          } />
       </Routes>
     </BrowserRouter>
   );

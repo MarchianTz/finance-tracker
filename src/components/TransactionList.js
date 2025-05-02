@@ -3,7 +3,7 @@ function TransactionList({ items }) {
         <ul>
             {items.map((t) => (
                 <li key={t.id}>
-                    {t.description}: ${t.amount}
+                    {t.text}: ${t.amount}
                 </li>
             ))}
         </ul>

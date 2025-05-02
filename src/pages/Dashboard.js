@@ -1,6 +1,6 @@
-import Header from './Header';
-import TransactionForm from './TransactionForm';
-import TransactionList from './TransactionList';
+import Header from '../components/Header';
+import TransactionForm from '../components/TransactionForm';
+import TransactionList from '../components/TransactionList';
 
 function Dashboard({ transactions, onAdd }) {
     return (
