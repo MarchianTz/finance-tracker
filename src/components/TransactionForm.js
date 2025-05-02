@@ -1,42 +1,55 @@
 import { useState } from 'react';
 
 function TransactionForm({ onAdd }) {
-    const [description, setDescription] = useState('');
+    const [text, setText] = useState('');
     const [amount, setAmount] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!description || !amount) return;
+        if (!text || !amount) {
+            alert('Please fill in both fields');
+            return;
+        }
 
-        const newTransaction = {
-            id: Date.now(),
-            description,
+        const transaction = {
+            text,
             amount: parseFloat(amount),
+            timestamp: new Date()
         };
 
-        onAdd(newTransaction);
-        setDescription('');
+        onAdd(transaction);
+
+
+        setText('');
         setAmount('');
     };
 
     return (
         <form onSubmit={handleSubmit} className="mb-4">
-            <input
-            type="text"
-            placeholder="Description"
-            className="block w-full mb-2 p-2 border border-gray-300 rounded"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            />
-            <input
-            type="number"
-            placeholder="Amount"
-            className="block w-full mb-2 p-2 border border-gray-300 rounded"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            />
-            <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700" type="submit">Add Transaction</button>
+            <div className="mb-2">
+                <label className="block font-semibold mb-1">Description</label>
+                <input
+                type="text"
+                placeholder="e.g. Salary, Rent"
+                className="w-full p-2 border rounded"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                />
+            </div>
+            <div className="mb-2">
+                <label className="block font-semibold mb-1">Amount</label>
+                <input
+                type="number"
+                placeholder="e.g. 1000 or -500"
+                className="block w-full mb-2 p-2 border border-gray-300 rounded"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                />
+                <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" type="submit">
+                    Add Transaction
+                </button>
+            </div>
         </form>
     );
 }
